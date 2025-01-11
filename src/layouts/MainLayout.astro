@@ -1,0 +1,43 @@
+---
+import { ClientRouter } from "astro:transitions";
+import { SITE_INFO } from "src/consts/site-info";
+
+interface Props {
+  title: string;
+  image?: string;
+  description?: string;
+}
+
+const {
+  title = SITE_INFO.title,
+  description = SITE_INFO.description,
+  image,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <meta name="description" content={description} />
+    <meta name="author" content="Jose Cabrales" />
+
+    <!-- OG Metatags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <title>{title}</title>
+
+    <ClientRouter />
+  </head>
+  <body class="bg-slate-800 text-sky-100 m-auto max-w-3xl">
+    <main class="mt-10">
+      <slot />
+    </main>
+  </body>
+</html>
